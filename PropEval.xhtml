@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+ <head>
+ <title>Property Evaluator, by Sharif</title>
+ <script type="application/javascript" src="./PropEval.js"></script>
+ </head>
+ <body onload="pageLoaded()">
+ <h1>Quick yes/no property evaluator</h1>
+ <p>
+	 <br/>
+	 <table border="1" cellpadding="1" cellspacing="2">
+		<tr>
+			<td>
+				<tr>
+				<td>Asking Price</td>
+				<td><input type="number" id="full_price" value="94995" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td id="tax_term_radios"> Taxes
+          <input type="radio" name="tax_term" value="12" onchange="valueUpdated()" checked="checked" /> Annually
+  				<input type="radio" name="tax_term" value="1" onchange="valueUpdated()" /> Monthly
+        </td>
+				<td><input type="number" id="taxes" value="3500" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Estimated Repairs</td>
+				<td><input type="number" id="repair_cost" value="14995" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Cash Downpayment</td>
+				<td><input type="number" id="cash_down" value="20000" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Unsecured Loan (5yr @ 7.25%)</td>
+				<td><input type="number" id="prosper_down" value="0" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>401k Loan (5yr @ 5.25%)</td>
+				<td><input type="number" id="k401_down" value="0" onchange="valueUpdated()"  /></td>
+				</tr>
+				<tr>
+				<td id="mtgt_term_radios"> Mortgage term
+				<input type="radio" name="mortgage_term" value="120" onchange="valueUpdated()" />10 yr
+				<input type="radio" name="mortgage_term" value="180" onchange="valueUpdated()" checked="checked" />15 yr
+				<input type="radio" name="mortgage_term" value="360" onchange="valueUpdated()" />30 yr
+				</td>
+				</tr>
+				<tr>
+				<td>APR (3% - 10%)</td>
+				<td><input type="number" id="mortgage_apr" min="3.0" max="10.0" step="0.25" value="5.5" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Mortgage balance</td>
+				<td><input type="number" id="mtgt_amount" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Calculated Mortgage payment</td>
+				<td><input type="number" id="long_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Calculated Non-Mortgage payments</td>
+				<td><input type="number" id="short_payments" value="0" disabled="disabled" /></td>
+				</tr>
+			</td>
+			<td>
+				<tr>
+				<td>Gross Income</td>
+				<td><input type="number" id="gross_rent" value="1150" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Loan Payments</td>
+				<td><input type="number" id="loan_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Taxes</td>
+				<td><input type="number" id="tax_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Insurance</td>
+				<td><input type="number" id="insurance_payments" value="65" onchange="valueUpdated()" /></td>
+				</tr>
+				<tr>
+				<td>Maintenance (15% rent)</td>
+				<td><input type="number" id="maint_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Vacancy (8% rent)</td>
+				<td><input type="number" id="vacancy_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Property Management (10% rent)</td>
+				<td><input type="number" id="mgmt_payments" value="0" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Water/Sewer</td>
+				<td><input type="number" id="water_payments" value="30"  disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Lawn care/Snow removal</td>
+				<td><input type="number" id="snow_payments" value="60" disabled="disabled" /></td>
+				</tr>
+				<tr>
+				<td>Immediate Net Operating Income (NOI)</td>
+				<td id="noi_now" />
+				</tr>
+				<tr>
+				<td>NOI after 5yr loans paid off</td>
+				<td id="noi_5yr" />
+				</tr>
+				<tr>
+				<td>NOI after mortgage paid off</td>
+				<td id="noi_30yr" />
+				</tr>
+			</td>
+		</tr>
+	 </table>
+ </p>
+ <br/>
+
+ <h2> Return on Investment (ROI) / Cash on Cash (CoC) </h2>
+ <p>
+ <table width="30%">
+	<th/><th>ROI</th><th>CoC</th>
+	<tr><td>Now</td><td id="roi_now"/><td id="coc_now"/></tr>
+	<tr><td>5 year</td><td id="roi_5yr"/><td id="coc_5yr"/></tr>
+	<tr><td>Long Term</td><td id="roi_30yr"/><td id="coc_30yr"/></tr>
+ </table>
+ </p>
+
+ </body>
+</html>
