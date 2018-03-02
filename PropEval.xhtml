@@ -9,12 +9,12 @@
  <h1>Quick yes/no property evaluator</h1>
  <p>
 	 <br/>
-	 <table border="1" cellpadding="1" cellspacing="2">
+	 <table border="0" cellpadding="1" cellspacing="2">
 		<tr>
 			<td>
 				<tr>
 				<td>Asking Price</td>
-				<td><input type="number" id="full_price" value="94995" onchange="valueUpdated()" /></td>
+				<td><input type="number" id="full_price" value="100000" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
 				<td id="tax_term_radios"> Taxes
@@ -25,10 +25,14 @@
 				</tr>
 				<tr>
 				<td>Estimated Repairs</td>
-				<td><input type="number" id="repair_cost" value="14995" onchange="valueUpdated()" /></td>
+				<td><input type="number" id="repair_cost" value="3000" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
-				<td>Cash Downpayment</td>
+				<td id="cash_down_radios">Cash Downpayment
+          <input type="radio" name="down_pmt" value="20p" onchange="valueUpdated()" checked="checked" />20%
+  				<input type="radio" name="down_pmt" value="25p" onchange="valueUpdated()" />25%
+          <input type="radio" name="down_pmt" value="custom" onchange="valueUpdated()" />custom
+        </td>
 				<td><input type="number" id="cash_down" value="20000" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
@@ -42,13 +46,13 @@
 				<tr>
 				<td id="mtgt_term_radios"> Mortgage term
 				<input type="radio" name="mortgage_term" value="120" onchange="valueUpdated()" />10 yr
-				<input type="radio" name="mortgage_term" value="180" onchange="valueUpdated()" checked="checked" />15 yr
-				<input type="radio" name="mortgage_term" value="360" onchange="valueUpdated()" />30 yr
+				<input type="radio" name="mortgage_term" value="180" onchange="valueUpdated()" />15 yr
+				<input type="radio" name="mortgage_term" value="360" onchange="valueUpdated()" checked="checked" />30 yr
 				</td>
 				</tr>
 				<tr>
 				<td>APR (3% - 10%)</td>
-				<td><input type="number" id="mortgage_apr" min="3.0" max="10.0" step="0.25" value="5.5" onchange="valueUpdated()" /></td>
+				<td><input type="number" id="mortgage_apr" min="3.0" max="10.0" step="0.25" value="5.0" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
 				<td>Mortgage balance</td>
@@ -66,7 +70,7 @@
 			<td>
 				<tr>
 				<td>Gross Income</td>
-				<td><input type="number" id="gross_rent" value="1150" onchange="valueUpdated()" /></td>
+				<td><input type="number" id="gross_rent" value="1450" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
 				<td>Loan Payments</td>
@@ -78,30 +82,42 @@
 				</tr>
 				<tr>
 				<td>Insurance</td>
-				<td><input type="number" id="insurance_payments" value="65" onchange="valueUpdated()" /></td>
+				<td><input type="number" id="insurance_payments" value="80" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
-				<td>Maintenance (15% rent)</td>
-				<td><input type="number" id="maint_payments" value="0" disabled="disabled" /></td>
+				<td id="mx_radios">Maintenance
+          <input type="radio" name="mx_calc" value="15pRent" onchange="valueUpdated()" checked="checked" />15% rent
+  				<input type="radio" name="mx_calc" value="1pValue" onchange="valueUpdated()" />1% home value
+          <input type="radio" name="mx_calc" value="custom" onchange="valueUpdated()" />custom
+        </td>
+				<td><input type="number" id="maint_payments" value="0" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
-				<td>Vacancy (8% rent)</td>
+				<td id="vacancy_radios">Vacancy (1 mo every)
+          <input type="radio" name="vacancy_period" value="1yr" onchange="valueUpdated()" />1 yr
+  				<input type="radio" name="vacancy_period" value="2yr" onchange="valueUpdated()" checked="checked" />2 yr
+          <input type="radio" name="vacancy_period" value="5yr" onchange="valueUpdated()" />5 yr
+        </td>
 				<td><input type="number" id="vacancy_payments" value="0" disabled="disabled" /></td>
 				</tr>
 				<tr>
-				<td>Property Management (10% rent)</td>
+				<td id="mgmt_radios">Property Management
+          <input type="radio" name="mgmt_type" value="full" onchange="valueUpdated()" checked="checked" />full (10%)
+  				<input type="radio" name="mgmt_type" value="partial" onchange="valueUpdated()" />incidentals (6%)
+          <input type="radio" name="mgmt_type" value="self" onchange="valueUpdated()" />self ($50)
+        </td>
 				<td><input type="number" id="mgmt_payments" value="0" disabled="disabled" /></td>
 				</tr>
 				<tr>
 				<td>Water/Sewer</td>
-				<td><input type="number" id="water_payments" value="30"  disabled="disabled" /></td>
+				<td><input type="number" id="water_payments" value="45" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
 				<td>Lawn care/Snow removal</td>
-				<td><input type="number" id="snow_payments" value="60" disabled="disabled" /></td>
+				<td><input type="number" id="snow_payments" value="85" onchange="valueUpdated()" /></td>
 				</tr>
 				<tr>
-				<td>Immediate Net Operating Income (NOI)</td>
+				<td>Net Operating Income (NOI) Today</td>
 				<td id="noi_now" />
 				</tr>
 				<tr>
@@ -124,7 +140,7 @@
 	<th/><th>ROI</th><th>CoC</th>
 	<tr><td>Now</td><td id="roi_now"/><td id="coc_now"/></tr>
 	<tr><td>5 year</td><td id="roi_5yr"/><td id="coc_5yr"/></tr>
-	<tr><td>Long Term</td><td id="roi_30yr"/><td id="coc_30yr"/></tr>
+	<tr><td>Prepetual</td><td id="roi_30yr"/><td id="coc_30yr"/></tr>
  </table>
  </p>
 
