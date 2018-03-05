@@ -86,7 +86,11 @@ function valueUpdated() {
       maint_payments.disabled = true;
       break;
     case '1pValue':
-      maint_payments.value = (((full_price + repair_cost) * 0.01) / 12).toFixed(2); // monthly rate for 1% annually
+      maint_payments.value = (((full_price + repair_cost) * 0.010) / 12).toFixed(2); // monthly rate for 1% annually
+      maint_payments.disabled = true;
+      break;
+    case '1.5pValue':
+      maint_payments.value = (((full_price + repair_cost) * 0.015) / 12).toFixed(2); // monthly rate for 1.5% annually
       maint_payments.disabled = true;
       break;
     case 'custom':
